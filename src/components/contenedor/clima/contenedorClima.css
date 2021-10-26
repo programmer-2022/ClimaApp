@@ -1,0 +1,15 @@
+.main-container-clima {
+    width: 40%;
+    padding: 10px;
+    background-color: #57606f;
+    border-radius: 0px 10px 10px 0px;
+}
+.main-container-clima h2 {
+   display: block;
+   padding: 5px;
+   color: snow;
+}
+.contenedor-clima div {
+    margin-top: 20px;
+    border: 1px solid snow;
+}

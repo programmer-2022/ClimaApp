@@ -1,0 +1,26 @@
+.tarjeta-noticia {
+    padding: 5px;
+    cursor: pointer;
+}
+.tarjeta-noticia:hover {
+    background-color: rgba(241, 241, 241, 0.061);
+}
+.tarjeta-noticia h3 {
+    color: snow;
+    letter-spacing: 1px;
+    font-size: large;
+    margin-bottom: 20px;
+}
+.tarjeta-noticia .descripcion-noticia {
+    text-align: justify;
+    margin-bottom: 20px;    
+}
+.tarjeta-noticia p {
+    color: snow;
+    letter-spacing: 1px;
+    font-size: large;
+}
+.tarjeta-noticia .fecha-noticia {
+    font-style: italic;
+    font-size: 14px;
+}
