@@ -1,35 +1,22 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import "./cardClima.css"
 
-export default function CardClima () {
+export default function CardClima (props: any) {
  
   return (
-    <Card sx={{ 
-        width: 800, 
-        minWidth: 400, 
-        mb: '10px', 
-        backgroundColor: '#474b6f', 
-        color: '#fff',
-        borderRadius: '0px',
-        border: 'none',
-        borderLeft: '1px solid #fff'      
-      }}>
-      <CardContent>
-        <Typography gutterBottom 
-          variant="h6" 
-          component="div"
-          textAlign="justify"
-          lineHeight="25px"
-          >
-          TIEMPO
-        </Typography>
-       
-      </CardContent>
-    </Card>
+    <div className="ContenedorClima">
+      <div className="Temp">
+        <h2>{props.temp}°c</h2>
+      </div>
+      <div className="ContenedorListaClima">
+        <ul className="ListaClima">
+          <li>Ciudad: {props.ciudad}</li>
+          <li>Hora y fecha local: {props.horaFecha}</li>
+          <li>Velocidad del viento: {props.viento}kmh</li>
+          <li>Humedad: {props.humedad}%</li>
+          <li>Nubosidad: {props.nubosidad}%</li>
+        </ul>
+      </div>
+    </div>
   );
 }
