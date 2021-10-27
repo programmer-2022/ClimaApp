@@ -20,13 +20,7 @@ export default function ContenedorClima() {
             </Typography>
 
             <CardClima />
-            <CardClima />
-            <CardClima />
-            <CardClima />
-            <CardClima />
-            <CardClima />
-
-
+ 
         </Container>
     );
 }
