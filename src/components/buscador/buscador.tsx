@@ -11,8 +11,8 @@ export default function Buscador() {
     return (
         <div className="buscador-container">
             <form>
-                <input type="text" id="buscar" placeholder="Búsqueda" autoComplete="off" />
-                <button onClick={getCiudad}>Buscar ubicación</button>
+                <input type="text" id="buscar" placeholder="Búsqueda por ciudad" autoComplete="off" />
+                <button onClick={getCiudad}>Buscar</button>
             </form>
         </div>
     )

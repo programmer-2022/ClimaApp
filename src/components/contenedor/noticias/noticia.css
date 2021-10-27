@@ -1,4 +1,5 @@
 .tarjeta-noticia {
+    color: snow;
     padding: 5px;
     cursor: pointer;
 }
@@ -6,21 +7,27 @@
     background-color: rgba(241, 241, 241, 0.061);
 }
 .tarjeta-noticia h3 {
-    color: snow;
     letter-spacing: 1px;
-    font-size: large;
+    font-size: 16px;
     margin-bottom: 20px;
+    text-align: justify;
 }
 .tarjeta-noticia .descripcion-noticia {
     text-align: justify;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
+    font-size: 15px;
 }
-.tarjeta-noticia p {
-    color: snow;
-    letter-spacing: 1px;
-    font-size: large;
+.tarjeta-noticia .descripcion-noticia span,
+.tarjeta-noticia h3 span {
+    font-size: 18px;
 }
 .tarjeta-noticia .fecha-noticia {
     font-style: italic;
-    font-size: 14px;
+    font-size: 12px;
 }
+.tarjeta-noticia h3 span,
+.tarjeta-noticia .descripcion-noticia span,
+.tarjeta-noticia .fecha-noticia span {
+    color: rgb(142 147 153);
+}
+

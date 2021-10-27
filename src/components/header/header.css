@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 .header-container {
-    text-align: center;
+    text-align: left;
     padding: 20px;
-    background-color: #30336b;
+    background-color: #38383f;
 }
 .header-container h1 {
-    font-size: 30px;
+    font-size: 25px;
     color: snow;
     letter-spacing: 2px;
     font-family: 'Roboto Condensed', sans-serif;
