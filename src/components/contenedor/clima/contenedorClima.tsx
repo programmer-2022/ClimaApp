@@ -8,45 +8,51 @@ import CardClima from './cardClima';
 import Divider from '@mui/material/Divider'
 
 export interface IClima {
-    ciudad : string,
-    horaFecha : string,
-    viento : number,
-    humedad : number,
-    nubosidad : number
+    temp?: string,
+    ciudad? : string,
+    horaFecha? : string,
+    viento? : string,
+    humedad? : string,
+    nubosidad? : string
 }
 
-export default function ContenedorClima() {
+export default function ContenedorClima(props : any) {
    
 
-    const [listaClima, setListaClima] = useState<IClima[]>([])
+    const [clima, setListaClima] = useState<IClima[]>([])
 
+    const [ciudad, setCiudad] = useState("")
+ 
     useEffect(() => {
-        const city = "London"
+        setCiudad(props.city)
+
         const KEY_API = "76491ee9d5794d3e875222225212010"
-        const URL = `https://api.weatherapi.com/v1/current.json?key=${KEY_API}&q=${city}&aqi=no`
+        const URL = `https://api.weatherapi.com/v1/current.json?key=${KEY_API}&q=${ciudad}&aqi=no`
                               
         const getClima = async() => {
 
             try {
                 const res = await fetch(URL)
-                const data = await res.json() 
-                              
+                const data = await res.json()
+
+                console.log(data);                
+                            
                 let clima : IClima = {
+                    temp: data.current.temp_c,
                     ciudad : data.location.name,
                     horaFecha : data.location.localtime,
                     viento : data.current.wind_kph,
                     humedad : data.current.humidity,
                     nubosidad : data.current.cloud
                 }  
-                console.log(clima)
-                setListaClima((listaClima) => [...listaClima, clima])
-                console.log(listaClima[0])
-             } catch (err) {
+                setListaClima([clima])
+
+            } catch (err) {
                 console.log("Error", err);
             }
         }
-        getClima()        
-    }, [])
+        if(ciudad != null) getClima()        
+    }, [ciudad])
 
     return (
         <Container sx={{ width: 800, mr: '50px', backgroundColor: '#474b6f', pt: '20px' }}>
@@ -56,14 +62,10 @@ export default function ContenedorClima() {
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#fff', mb: '5px' }}
             >
             Clima y Tiempo
-            </Typography>
-
-                           
-               
+            </Typography>     
             
-
-            
- 
+            {(clima.length != 0 && ciudad != null) ? (<CardClima temp={clima[0].temp} ciudad={clima[0].ciudad} horaFecha={clima[0].horaFecha} viento={clima[0].viento} humedad={clima[0].humedad} nubosidad={clima[0].nubosidad} />) : (<h3>Cargando...</h3>) }
+                 
         </Container>
     );
 }

@@ -13,15 +13,23 @@ export interface INoticias {
     publishedAt : string
 }
 
-export default function ContenedorNoticias() {
+export default function ContenedorNoticias(props : any) {
    
     const [listaNoticias, setNoticias] = useState<INoticias[]>([])
 
+    const [ciudad, setCiudad] = useState("")
+    
     useEffect(() => {
-        const city = "Pokemon"
+        setCiudad(props.city)
+        console.log("Ciudad: ", ciudad);
+        
+    }, [ciudad])
+
+    useEffect(() => {
+
         const API_KEY = "bcb5e23e3201463288516a8914e2caba" //newsapi.org
         const date = new Date().toISOString().slice(0,10);
-        const URL = `https://newsapi.org/v2/everything?q=${city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
+        const URL = `https://newsapi.org/v2/everything?q=${props.city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
                               
         const getNoticias = async() => {
 
@@ -41,7 +49,9 @@ export default function ContenedorNoticias() {
                 console.log("Error", err);
             }
         }
-        getNoticias()        
+        
+        if(ciudad != null) getNoticias()
+
     }, [])
 
     return (
@@ -56,10 +66,10 @@ export default function ContenedorNoticias() {
 
             <Divider sx={{ borderColor: '#fff', mb: '10px' }}/>
 
-            {
+            { 
                 listaNoticias.map((el, index) => (
                     <CardNoticia key={index} content={el.content} description={el.description} publishedAt={el.publishedAt} />
-                ))
+                ))               
             }
         </Container>
     );
