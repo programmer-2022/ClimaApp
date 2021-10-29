@@ -1,4 +1,3 @@
-import * as React from 'react';
 import "./cardClima.css"
 
 export default function CardClima (props: any) {

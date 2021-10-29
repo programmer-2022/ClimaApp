@@ -1,45 +1,97 @@
-import * as React from 'react';
-import { createRef, useRef, useState } from 'react';
-
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import {  useState } from 'react';
+import { useHistory } from 'react-router-dom'
+import {Paper, InputBase, IconButton, Container} from '@mui/material/';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import Container from '@mui/material/Container/Container';
-import FormControl from '@mui/material/FormControl'
-import Button from '@mui/material/Button'
-import Contenedor from '../contenedor/contenedor'
-import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
+const initialForm = {
+  ciudad: ""
+}
 
 export default function Buscador() {
 
-  const [ciudad, setCiudad] = useState("")
-  const [ruta, setRuta] = useState("")
+  const [form, setForm] = useState(initialForm)
+  const history = useHistory()
   
-  const handleSubmit= (e : any) => {
-    setCiudad(e.target.value)
-    setRuta(`/noticias/:${ciudad}`) 
+  const handleOnChange= (e : any) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleOnSubmit = (e : any) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if(form.ciudad === '') {
+      Swal.fire({
+          title: 'Error!',
+          text: 'Ingrese una Ciudad ej:(London)',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+      })
+      return
+    }
+    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: `Se almacenó correctamente ${form.ciudad}`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+    saveRecordDB()
+    history.push(`/noticias/${form.ciudad}`);
+  }
+
+  const saveRecordDB = () => {
+    
+    try {
+      const URL = "https://localhost:5001/api/Historial"
+      fetch(URL, {
+        method: "POST",
+        body: JSON.stringify({
+          city: form.ciudad,
+          info: "info"
+        }),
+        headers: {
+          "Accept" : "application/json",
+          "Content-Type" : "application/json"
+        }
+      }).then(res => {
+        if(res.ok) {
+          console.log(res);
+        }
+      })     
+      
+    } catch (error) {
+      console.log("Error en la inserción de datos", error);      
+    }
   }
 
   return (
     <Container  sx={{ pt: '300px' }}>
       <Paper
+      onSubmit={handleOnSubmit}
       component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 1000 }}
     >
     
       <InputBase
-        id="busqueda"
         sx={{ ml: 1, flex: 1, p: '10px' }}
+        name="ciudad"
         placeholder="Ingresa Ubicación ej:(London)"
+        autoComplete="off"
         inputProps={{ 'aria-label': 'search google maps' }}
-        onChange={(e) => setCiudad(e.target.value)}
+        onChange={handleOnChange}
+        defaultValue={form.ciudad}
       />
       
-      <Link to="/noticias/:Colombia">Buscar</Link>  
+      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
            
     </Paper>
     </Container> 

@@ -1,50 +1,42 @@
-import * as React from 'react';
 import { useState, useEffect } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import {Typography, Container, Divider} from '@mui/material/';
 import CardNoticia from './cardNoticia'
-import Divider from '@mui/material/Divider'
-
 export interface INoticias {
-    content : string,
-    description : string,
-    publishedAt : string
+    title? : string,
+    description? : string,
+    publishedAt? : string
 }
 
 export default function ContenedorNoticias(props : any) {
    
     const [listaNoticias, setNoticias] = useState<INoticias[]>([])
-
     const [ciudad, setCiudad] = useState("")
     
     useEffect(() => {
         setCiudad(props.city)
-        console.log("Ciudad: ", ciudad);
-        
     }, [ciudad])
 
     useEffect(() => {
 
         const API_KEY = "bcb5e23e3201463288516a8914e2caba" //newsapi.org
         const date = new Date().toISOString().slice(0,10);
-        const URL = `https://newsapi.org/v2/everything?q=${props.city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
-                              
+        
         const getNoticias = async() => {
-
+            
             try {
+                const URL = `https://newsapi.org/v2/everything?q=${props.city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
                 const res = await fetch(URL)
                 const data = await res.json()                
                 
                 data.articles.forEach((el : any) => {
                     let noticia : INoticias = {
-                        content : el.content,
+                        title : el.title,
                         description : el.description,
                         publishedAt : el.publishedAt
                     }
                     setNoticias((listaNoticias) => [...listaNoticias, noticia])
-                })       
+                })
+                       
              } catch (err) {
                 console.log("Error", err);
             }
@@ -68,7 +60,7 @@ export default function ContenedorNoticias(props : any) {
 
             { 
                 listaNoticias.map((el, index) => (
-                    <CardNoticia key={index} content={el.content} description={el.description} publishedAt={el.publishedAt} />
+                    <CardNoticia key={index} title={el.title} description={el.description} publishedAt={el.publishedAt} />
                 ))               
             }
         </Container>

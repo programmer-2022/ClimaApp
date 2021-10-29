@@ -1,9 +1,9 @@
-import {Card, CardContent, Typography} from '@mui/material/';
+import {Card, CardContent, Typography } from '@mui/material/';
 
-export default function CardNoticia (props : any) {
+export default function CardHistorial (props : any) {
  
   return (
-    <Card sx={{ 
+    <Card sx = {{ 
         width: 800, 
         minWidth: 400, 
         mb: '10px', 
@@ -20,15 +20,15 @@ export default function CardNoticia (props : any) {
           textAlign="justify"
           lineHeight="25px"
           >
-          {props.title}
+          Ciudad: {props.city}
         </Typography>
 
         <Typography variant="body2" textAlign="justify">
-          {props.description}
+          Información:{props.info}
         </Typography>
 
         <Typography variant="body2" marginTop="20px">
-          <strong>Fecha publicación:</strong> {props.publishedAt}
+          <strong>ID:</strong>{props.id}
         </Typography>
 
       </CardContent>
