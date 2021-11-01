@@ -7,13 +7,13 @@ export interface INoticias {
     publishedAt? : string
 }
 
-export default function ContenedorNoticias(props : any) {
+export default function ContenedorNoticias({city} : any) {
    
     const [listaNoticias, setNoticias] = useState<INoticias[]>([])
     const [ciudad, setCiudad] = useState("")
     
     useEffect(() => {
-        setCiudad(props.city)
+        setCiudad(city)
     }, [ciudad])
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function ContenedorNoticias(props : any) {
         const getNoticias = async() => {
             
             try {
-                const URL = `https://newsapi.org/v2/everything?q=${props.city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
+                const URL = `https://newsapi.org/v2/everything?q=${city}&from=${date}&sortBy=publishedAt&apiKey=${API_KEY}`
                 const res = await fetch(URL)
                 const data = await res.json()                
                 

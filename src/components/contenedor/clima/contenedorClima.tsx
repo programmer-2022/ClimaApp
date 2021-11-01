@@ -10,14 +10,13 @@ export interface IClima {
     nubosidad?: string
 }
 
-export default function ContenedorClima(props : any) {
+export default function ContenedorClima({city} : any) {
    
-
     const [clima, setListaClima] = useState<IClima[]>([])
-    const [ciudad, setCiudad] = useState("")
+    const [ciudad, setCiudad] = useState([])
  
     useEffect(() => {
-        setCiudad(props.city)
+        setCiudad(city)
 
         const KEY_API = "76491ee9d5794d3e875222225212010"
         

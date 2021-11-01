@@ -1,19 +1,20 @@
 import "./cardClima.css"
+import { IClima } from './contenedorClima'
 
-export default function CardClima (props: any) {
+export default function CardClima ({temp, ciudad, horaFecha, viento, humedad, nubosidad} : IClima) {
  
   return (
     <div className="ContenedorClima">
       <div className="Temp">
-        <h2>{props.temp}°c</h2>
+        <h2>{temp}°c</h2>
       </div>
       <div className="ContenedorListaClima">
         <ul className="ListaClima">
-          <li>Ciudad: {props.ciudad}</li>
-          <li>Hora y fecha local: {props.horaFecha}</li>
-          <li>Velocidad del viento: {props.viento}kmh</li>
-          <li>Humedad: {props.humedad}%</li>
-          <li>Nubosidad: {props.nubosidad}%</li>
+          <li>Ciudad: {ciudad}</li>
+          <li>Hora y fecha local: {horaFecha}</li>
+          <li>Velocidad del viento: {viento}kmh</li>
+          <li>Humedad: {humedad}%</li>
+          <li>Nubosidad: {nubosidad}%</li>
         </ul>
       </div>
     </div>
